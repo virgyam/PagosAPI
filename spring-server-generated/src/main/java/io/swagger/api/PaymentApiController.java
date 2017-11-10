@@ -27,7 +27,7 @@ public class PaymentApiController implements PaymentApi {
         List<TrasactionItem> trasactionItem = TransactionItemMock.loadListTrasactionsItem();
 
         for(TrasactionItem transaction : trasactionItem){
-            Link paymentItemLink = linkTo(methodOn(PaymentApi.class).
+            Link paymentItemLink = linkTo(methodOn(PaymentApiController.class).
                     getPayment(transaction.getPaymentId())).withSelfRel();
             transaction.add(paymentItemLink);
         }
@@ -36,16 +36,16 @@ public class PaymentApiController implements PaymentApi {
     }
 
     @Override
-    public ResponseEntity<PaymentItem> getPayment(String trasactionId) {
+    public ResponseEntity<PaymentItem> getPayment(@ApiParam(value = "Type the id payment",required=true ) @PathVariable("paymentId") String paymentId) {
 
         return new ResponseEntity<PaymentItem>(PaymentItemMock.paymentMethodItemMock(), HttpStatus.OK);
     }
 
     public ResponseEntity<TrasactionItem> pay(@ApiParam(value = "payment item") @RequestBody PaymentItem paymentItem) {
-        // do some magic!Object
+
         TrasactionItem trasactionItem = TransactionItemMock.loadTrasactionItem();
         Link paymentItemLink = linkTo(methodOn(PaymentApiController.class).
-                getPayment(paymentItem.getPaymentId())).
+                getPayment(trasactionItem.getPaymentId())).
                 withSelfRel();
         trasactionItem.add(paymentItemLink);
         return new ResponseEntity<TrasactionItem>(trasactionItem, HttpStatus.OK);

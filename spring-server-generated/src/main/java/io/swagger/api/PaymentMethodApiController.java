@@ -4,6 +4,7 @@ import io.swagger.model.PaymentMethodItem;
 
 import io.swagger.annotations.*;
 
+import io.swagger.util.PaymentMethodItemMock;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,8 +24,7 @@ import java.util.List;
 public class PaymentMethodApiController implements PaymentMethodApi {
 
     public ResponseEntity<Object> updatePaymentMethod(@ApiParam(value = "payment method item"  ) @RequestBody PaymentMethodItem paymentMethodItem) {
-        // do some magic!
-        return new ResponseEntity<Object>(HttpStatus.OK);
+        return new ResponseEntity<Object>(PaymentMethodItemMock.paymentMethodItemMock(), HttpStatus.OK);
     }
 
 }
