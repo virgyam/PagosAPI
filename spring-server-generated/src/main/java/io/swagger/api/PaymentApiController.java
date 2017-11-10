@@ -1,10 +1,8 @@
 package io.swagger.api;
 
+import io.swagger.annotations.ApiParam;
 import io.swagger.model.PaymentItem;
 import io.swagger.model.TrasactionItem;
-
-import io.swagger.annotations.*;
-
 import io.swagger.util.PaymentItemMock;
 import io.swagger.util.TransactionItemMock;
 import org.springframework.hateoas.Link;
@@ -13,10 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -29,9 +23,16 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @Controller
 public class PaymentApiController implements PaymentApi {
 
-    public ResponseEntity<List<TrasactionItem>> listPayments(@ApiParam(value = "pass an user id for looking up payments", required = true) @RequestParam(value = "clientId", required = true) String clientId) {
-        // do some magic!
-        return new ResponseEntity<List<TrasactionItem>>(HttpStatus.OK);
+    public ResponseEntity<List<TrasactionItem>> listPayments(@ApiParam(value = "pass an user id for looking up payments", required = true) @PathVariable(value = "clientId") String clientId) {
+        List<TrasactionItem> trasactionItem = TransactionItemMock.loadListTrasactionsItem();
+
+        for(TrasactionItem transaction : trasactionItem){
+            Link paymentItemLink = linkTo(methodOn(PaymentApi.class).
+                    getPayment(transaction.getPaymentId())).withSelfRel();
+            transaction.add(paymentItemLink);
+        }
+
+        return new ResponseEntity<>(trasactionItem, HttpStatus.OK);
     }
 
     @Override

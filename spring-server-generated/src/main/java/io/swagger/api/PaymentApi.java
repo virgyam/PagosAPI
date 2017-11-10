@@ -23,17 +23,17 @@ public interface PaymentApi {
 
     @ApiOperation(value = "searches payments", notes = "By passing in the appropriate user id, you can search for user payments ", response = TrasactionItem.class, responseContainer = "List", tags={ "developers", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "search results matching criteria", response = TrasactionItem.class),
-        @ApiResponse(code = 400, message = "bad input parameter", response = TrasactionItem.class) })
-    @RequestMapping(value = "/payment",
+        @ApiResponse(code = 200, message = "search results matching criteria", response = PaymentItem.class),
+        @ApiResponse(code = 400, message = "bad input parameter", response = PaymentItem.class) })
+    @RequestMapping(value = "/listPayments/{clientId}",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<TrasactionItem>> listPayments(@ApiParam(value = "pass an id trasaction for looking up payments", required = true) @RequestParam(value = "clientId", required = true) String clientId);
+    ResponseEntity<List<TrasactionItem>> listPayments(@ApiParam(value = "pass an id trasaction for looking up payments", required = true) @PathVariable(value = "clientId") String clientId);
 
     @ApiOperation(value = "searches payment", notes = "By passing in the appropriate payment id, you can search for a payment ", response = TrasactionItem.class, responseContainer = "List", tags={ "developers", })
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "search results matching criteria", response = TrasactionItem.class),
-            @ApiResponse(code = 400, message = "bad input parameter", response = TrasactionItem.class) })
+            @ApiResponse(code = 200, message = "search results matching criteria", response = PaymentItem.class),
+            @ApiResponse(code = 400, message = "bad input parameter", response = PaymentItem.class) })
     @RequestMapping(value = "/payment/{paymentId}",
             produces = { "application/json" },
             method = RequestMethod.GET)
