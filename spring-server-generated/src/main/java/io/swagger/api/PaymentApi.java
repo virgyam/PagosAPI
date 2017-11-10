@@ -39,7 +39,7 @@ public interface PaymentApi {
             method = RequestMethod.GET)
     ResponseEntity<PaymentItem> getPayment(@ApiParam(value = "pass an id trasaction for looking up payment", required = true) @PathVariable(value = "paymentId") String paymentId);
 
-    @ApiOperation(value = "make the payment", notes = "make the payment", response = TrasactionItem.class, tags={ "admins", })
+    @ApiOperation(value = "make the payment", notes = "make the payment", response = TrasactionItem.class, tags={ "admins", "developers",})
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "search results matching criteria", response = TrasactionItem.class),
         @ApiResponse(code = 201, message = "item created", response = TrasactionItem.class),

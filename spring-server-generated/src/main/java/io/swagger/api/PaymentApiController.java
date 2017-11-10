@@ -37,8 +37,7 @@ public class PaymentApiController implements PaymentApi {
 
     @Override
     public ResponseEntity<PaymentItem> getPayment(@ApiParam(value = "Type the id payment",required=true ) @PathVariable("paymentId") String paymentId) {
-
-        return new ResponseEntity<PaymentItem>(PaymentItemMock.paymentMethodItemMock(), HttpStatus.OK);
+        return new ResponseEntity<PaymentItem>(PaymentItemMock.paymentItemMock(), HttpStatus.OK);
     }
 
     public ResponseEntity<TrasactionItem> pay(@ApiParam(value = "payment item") @RequestBody PaymentItem paymentItem) {

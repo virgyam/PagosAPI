@@ -20,7 +20,7 @@ import java.util.List;
 @Api(value = "paymentMethod", description = "the paymentMethod API")
 public interface PaymentMethodApi {
 
-    @ApiOperation(value = "update the payment method", notes = "update the payment method", response = Object.class, tags={ "admins", })
+    @ApiOperation(value = "update the payment method", notes = "update the payment method", response = Object.class, tags={ "admins", "developers",})
     @ApiResponses(value = { 
         @ApiResponse(code = 200, message = "search results matching criteria", response = Object.class),
         @ApiResponse(code = 201, message = "item created", response = Object.class),

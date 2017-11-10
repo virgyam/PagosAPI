@@ -5,7 +5,7 @@ import io.swagger.model.PaymentMethodItem;
 
 public class PaymentItemMock {
 
-    public static PaymentItem paymentMethodItemMock(){
+    public static PaymentItem paymentItemMock(){
         PaymentItem paymentItem = new PaymentItem();
         paymentItem.setPaymentId("123");
         paymentItem.setClientId("123");
